@@ -1,0 +1,14 @@
+.nav {
+    background-color: #f2f2f2;
+}
+
+.logout {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.logout:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.375em;
+}

@@ -1,0 +1,9 @@
+.main {
+    width: 80%;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+}
