@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
-import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../axios';
 
 const AuthContext = createContext();
@@ -10,6 +10,8 @@ export default AuthContext;
 export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
+    const location = useLocation();
+    const from = location.state?.from.pathname || '/';
 
     const initiaAuthlValue = localStorage.getItem('authTokens')
         ? JSON.parse(localStorage.getItem('authTokens'))
@@ -36,7 +38,7 @@ export const AuthProvider = ({ children }) => {
                 setUser(jwt_decode(data.access));
                 localStorage.setItem('authTokens', JSON.stringify(data));
                 setErrors({});
-                navigate('/');
+                navigate(from, { replace: true });
             }
         } catch (err) {
             setErrors(err.response.data);
@@ -47,7 +49,7 @@ export const AuthProvider = ({ children }) => {
         setAuthTokens(null);
         setUser(null);
         localStorage.removeItem('authTokens');
-        navigate('/login');
+        navigate('/');
     };
 
     const registerUser = async ({ username, password, password2 }) => {
