@@ -1,35 +1,53 @@
 // import React, { useState, useEffect, useContext } from 'react';
 // import AuthContext from '../context/AuthContext';
+import Footer from '../../components/Footer/Footer';
 import styles from './HomePage.module.css';
 
 const HomePage = () => {
     return (
-        <div className={styles['main']}>
-            <h1 className={styles['main-header']}>Нитко ООД</h1>
-            <p>
-                Основна дейност на Нитко ООД е земеделие. Собственик на фирмата
-                е Николай Колев.{' '}
-            </p>
-            <p>
-                Землището се намира на територията на село Ивански, община
-                Шумен.
-            </p>
-            <p>
-                В момента фирмата разполага със 2134 декара обработваема земя.
-            </p>
-            <p>
-                Основните култури които се отглеждат са: жито, царевица и
-                слънчоглед.
-            </p>
-            <div>
-                <p>Фирмата разполага с:</p>
-                <ul>
-                    <li>3 Трактора</li>
-                    <li>1 Комбайна</li>
-                    <li>1 Самосвал</li>
-                </ul>
-            </div>
-        </div>
+        <>
+            <section className={styles['hero-wrapper']}>
+                <img
+                    src='https://cdn.pixabay.com/photo/2017/03/15/19/41/claas-2147239_1280.jpg'
+                    className={styles['hero-img']}
+                />
+                <div className={styles['hero-info']}>
+                    <h1 className={styles['hero-heading']}>Нитко ООД</h1>
+                    <p className={styles['hero-help-text']}>
+                        Основан през 2019г. със седалище във с.Ивански
+                    </p>
+                    <p className={styles['hero-help-text']}>
+                        Собственик Николай Колев
+                    </p>
+                </div>
+            </section>
+
+            <section className={styles['crops']}>
+                <div className={styles['crops-img-wrapper']}>
+                    <img
+                        src='https://images.pexels.com/photos/9305056/pexels-photo-9305056.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+                        className={styles['crops-img']}
+                    />
+                </div>
+                <div className={styles['crops-intro']}>
+                    <h2 className={styles['crops-heading']}>
+                        Отглежда пшеница, слънчоглед и царевица
+                    </h2>
+                    <p className={`${styles['green']}`}>
+                        Фирмата разполга с 2183 декара обработваема земя
+                    </p>
+                    <p className={styles['crops-info-txt']}>
+                        Николай Колев се занимава със земеделие от над 30
+                        години. Работи със световно извествни фирми за препарати
+                        и семена. Цел на фирмат е финансова независимост и
+                        семеен бизнес. Разполага с не малък набор от техника и
+                        база с размер над 2000 кв.м.
+                    </p>
+                </div>
+            </section>
+
+            <Footer />
+        </>
     );
 };
 
