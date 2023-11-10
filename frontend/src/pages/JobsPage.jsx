@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import JobList from '../components/Jobs/Jobs';
-import axiosInstance from '../axios';
+import axiosInstance from '../utils/axios';
 
 const JobsPage = () => {
     const [allJobs, setAllJobs] = useState([]);

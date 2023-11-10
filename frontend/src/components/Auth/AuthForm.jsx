@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import FormField from './FormField';
@@ -6,6 +6,7 @@ import styles from './AuthForm.module.css';
 
 const AuthForm = ({ handleSubmit, value, handleChange, path, errors }) => {
     const [showError, setShowError] = useState(false);
+    const userRef = useRef();
 
     useEffect(() => {
         if (errors) {
@@ -18,6 +19,13 @@ const AuthForm = ({ handleSubmit, value, handleChange, path, errors }) => {
             return () => clearTimeout(timeoutId);
         }
     }, [errors]);
+
+    useEffect(() => {
+        if (userRef.current) {
+            userRef.current.focus();
+        }
+    }, []);
+
     return (
         <div className={styles['form-wrapper']}>
             <div className={styles['inner-wrapper']}>
@@ -33,6 +41,7 @@ const AuthForm = ({ handleSubmit, value, handleChange, path, errors }) => {
                         type='text'
                         value={value.username}
                         onChange={handleChange}
+                        userRef={userRef}
                     />
                     <FormField
                         label='Парола'

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import JobField from '../JobField/JobField';
 import transformWorkerData from '../../../utils/WorkerDataTransform';
-import axiosInstance from '../../../axios';
+import axiosInstance from '../../../utils/axios';
 import styles from './JobForm.module.css';
 
 const jobs = [

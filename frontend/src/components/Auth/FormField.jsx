@@ -8,6 +8,7 @@ const FormField = ({
     value,
     onChange,
     htmlFor,
+    userRef,
 }) => {
     return (
         <div className={styles['form-row']}>
@@ -15,6 +16,7 @@ const FormField = ({
                 {label}:
             </label>
             <input
+                ref={userRef}
                 className={styles['form-input']}
                 id={htmlFor}
                 type={type}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axiosInstance from '../../axios';
+import axiosInstance from '../../utils/axios';
 
 const WorkersPage = () => {
     const [workers, setWorkers] = useState([]);
@@ -34,19 +34,18 @@ const WorkersPage = () => {
                             </div>
                         )}
                         <ul>
-                        {worker.worker_fields.length !== 0 && (
-                            <div>
-                                <h5>Ниви:</h5>
-                                {worker.worker_fields.map((field) => (
-                                    <li key={field.field__id}>
-                                        {field.field__name}
-                                    </li>
-                                ))}
-                            </div>
-                        )}
+                            {worker.worker_fields.length !== 0 && (
+                                <div>
+                                    <h5>Ниви:</h5>
+                                    {worker.worker_fields.map((field) => (
+                                        <li key={field.field__id}>
+                                            {field.field__name}
+                                        </li>
+                                    ))}
+                                </div>
+                            )}
+                        </ul>
                     </ul>
-                    </ul>
-                    
                 </div>
             ))}
         </div>
