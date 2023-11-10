@@ -1,9 +1,10 @@
 .footer {
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: #f2f2f2;
-    padding: 1.6rem;
+    height: 7rem;
 }
 
 .socials {

@@ -11,6 +11,7 @@ import Missing from './components/404/Missing';
 import Layout from './utils/Layout';
 import RequireAuth from './utils/RequireAuth';
 import GuestRoute from './utils/GuestRoute';
+import Footer from './components/Footer/Footer';
 
 function App() {
     return (
@@ -37,6 +38,7 @@ function App() {
                     <Route path='*' element={<Missing />} />
                 </Route>
             </Routes>
+            <Footer />
         </>
     );
 }
