@@ -79,4 +79,5 @@ select {
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 10.8rem);
+    margin-bottom: 2rem;
 }

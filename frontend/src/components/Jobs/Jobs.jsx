@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import JobForm from './JobForm/JobForm';
 import Modal from '../Modal/Modal';
-import classes from './Jobs.module.css';
+import styles from './Jobs.module.css';
 import formatDateTime from '../../utils/dateFormat';
 
 function JobList({ jobs, deleteJob, hasFetched }) {
@@ -10,7 +10,7 @@ function JobList({ jobs, deleteJob, hasFetched }) {
     const [selectedJob, setSelectedJob] = useState(null);
     const [isEditMode, setIsEditMode] = useState(false);
 
-    const newJobClasses = `btn btn-primary align-self-end ${classes.btnWidth}`;
+    const newJobClasses = `btn btn-primary align-self-end ${styles.btnWidth}`;
 
     const toggleModal = () => {
         setShowModal(!showModal);
@@ -26,9 +26,12 @@ function JobList({ jobs, deleteJob, hasFetched }) {
         <div className='d-flex justify-content-center m-auto mt-3 w-75'>
             <div className='w-100 d-flex flex-column gap-3'>
                 <h1 className='text-center mb-3'>Задачи</h1>
-                <div className='overflow-auto' style={{ maxHeight: '650px' }}>
+                <div
+                    className={styles['table-container']}
+                    style={{ maxHeight: '650px' }}
+                >
                     <table className='table table-striped table-bordered m-auto'>
-                        <thead>
+                        <thead className={styles['sticky-header']}>
                             <tr>
                                 <th>№</th>
                                 <th>Вид на работа</th>
@@ -38,12 +41,12 @@ function JobList({ jobs, deleteJob, hasFetched }) {
                                 <th className='w-auto'>Приключи</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className={styles['table-body']}>
                             {jobs.map((job) => (
                                 <tr key={job.id}>
                                     <td>
                                         <a
-                                            className={`link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover ${classes.cursor}`}
+                                            className={`link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover ${styles.cursor}`}
                                             onClick={() => openJobDetails(job)}
                                         >
                                             {job.id}
@@ -56,7 +59,7 @@ function JobList({ jobs, deleteJob, hasFetched }) {
                                         {job.worker.last_name}
                                     </td>
                                     <td>{formatDateTime(job.created)}</td>
-                                    <td className={classes['short-td']}>
+                                    <td className={styles['short-td']}>
                                         <button
                                             className='btn btn-danger'
                                             onClick={() => deleteJob(job.id)}

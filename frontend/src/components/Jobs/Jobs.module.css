@@ -10,3 +10,15 @@
 .cursor {
     cursor: pointer;
 }
+
+.table-container {
+    max-height: 650px;
+    overflow-y: auto;
+}
+
+.sticky-header th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    z-index: 1;
+}

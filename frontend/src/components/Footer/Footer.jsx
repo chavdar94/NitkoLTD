@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <footer className={styles['footer']}>
             <div className={styles['contact-me']}>
-                <p>Можете да се свържете с мен тук:</p>
+                <p>Свържете се с мен</p>
                 <ul className={styles['socials']}>
                     <li>
                         <a
