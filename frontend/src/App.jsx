@@ -10,6 +10,7 @@ import WorkersPage from './pages/WorkersPage/WorkersPage';
 import Missing from './components/404/Missing';
 import Layout from './utils/Layout';
 import RequireAuth from './utils/RequireAuth';
+import GuestRoute from './utils/GuestRoute';
 
 function App() {
     return (
@@ -19,8 +20,12 @@ function App() {
                 <Route path='/' element={<Layout />}>
                     {/* public routes */}
                     <Route path='/' element={<HomePage />} />
-                    <Route path='login' element={<LoginPage />} />
-                    <Route path='register' element={<Register />} />
+
+                    {/* public if not logged in else redirecting to home page */}
+                    <Route element={<GuestRoute />}>
+                        <Route path='login' element={<LoginPage />} />
+                        <Route path='register' element={<Register />} />
+                    </Route>
 
                     {/* private routes */}
                     <Route element={<RequireAuth />}>
