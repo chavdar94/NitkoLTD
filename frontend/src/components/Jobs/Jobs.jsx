@@ -1,23 +1,9 @@
 import React, { useState } from 'react';
 
-import JobForm from './JobForm';
+import JobForm from './JobForm/JobForm';
 import Modal from '../Modal/Modal';
 import classes from './Jobs.module.css';
-
-function formatDateTime(dateTimeStr) {
-    const date = new Date(dateTimeStr);
-
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-
-    const formattedDate = `${day}/${month}/${year} г.`;
-    const formattedTime = `${hours}:${minutes} ч.`;
-
-    return `${formattedTime} | ${formattedDate}`;
-}
+import formatDateTime from '../../utils/dateFormat';
 
 function JobList({ jobs, deleteJob, hasFetched }) {
     const [showModal, setShowModal] = useState(false);
@@ -58,7 +44,8 @@ function JobList({ jobs, deleteJob, hasFetched }) {
                                     <td>
                                         <a
                                             className={`link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover ${classes.cursor}`}
-                                            onClick={() => openJobDetails(job)}>
+                                            onClick={() => openJobDetails(job)}
+                                        >
                                             {job.id}
                                         </a>
                                     </td>
@@ -72,7 +59,8 @@ function JobList({ jobs, deleteJob, hasFetched }) {
                                     <td className={classes['short-td']}>
                                         <button
                                             className='btn btn-danger'
-                                            onClick={() => deleteJob(job.id)}>
+                                            onClick={() => deleteJob(job.id)}
+                                        >
                                             Изтрий
                                         </button>
                                     </td>

@@ -1,11 +1,11 @@
 // import React, { useState, useEffect, useContext } from 'react';
 // import AuthContext from '../context/AuthContext';
-import classes from './HomePage.module.css';
+import styles from './HomePage.module.css';
 
 const HomePage = () => {
     return (
-        <div className={classes.main}>
-            <h1 className='fst-italic fw-bold'>Нитко ООД</h1>
+        <div className={styles['main']}>
+            <h1 className={styles['main-header']}>Нитко ООД</h1>
             <p>
                 Основна дейност на Нитко ООД е земеделие. Собственик на фирмата
                 е Николай Колев.{' '}

@@ -1,20 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import classes from './Modal.module.css';
+import styles from './Modal.module.css';
 
 const Backdrop = (props) => {
     const backDropOnClick = () => {
         props.onClose();
         props.setIsEditMode(false);
     };
-    return <div className={classes.backdrop} onClick={backDropOnClick} />;
+    return <div className={styles['backdrop']} onClick={backDropOnClick} />;
 };
 
 const ModalOverlay = (props) => {
     return (
-        <div className={classes.modal}>
-            <div className={classes.content}>{props.children}</div>
+        <div className={styles['modal']}>
+            <div className={styles['content']}>{props.children}</div>
         </div>
     );
 };

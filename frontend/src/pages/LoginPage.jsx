@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
-import AuthContext from '../context/AuthContext';
+import { useState } from 'react';
 import AuthForm from '../components/Auth/AuthForm';
+import useAuth from '../hooks/useAuth';
 
 const LoginPage = () => {
-    const { loginUser, errors } = useContext(AuthContext);
+    const { loginUser, errors } = useAuth();
     const [formData, setFormData] = useState({
         username: '',
         password: '',

@@ -5,7 +5,6 @@ from fields.models import Field
 
 UserModel = get_user_model()
 
-
 class FieldSerializer(ModelSerializer):
     class Meta:
         model = Field
@@ -31,10 +30,12 @@ class UserCreateSerializer(ModelSerializer):
 
     def validate(self, attrs):
         password = attrs.get('password')
+
         try:
             validate_password(password)
         finally:
             return attrs
+
 
 
 class UserListSeriazlizer(ModelSerializer):

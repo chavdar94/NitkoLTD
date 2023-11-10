@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import JobField from './JobField';
-import transformWorkerData from '../../utils/WorkerDataTransform';
-import axiosInstance from '../../axios';
+import JobField from '../JobField/JobField';
+import transformWorkerData from '../../../utils/WorkerDataTransform';
+import axiosInstance from '../../../axios';
+import styles from './JobForm.module.css';
 
 const jobs = [
     { name: 'Оран', id: 1 },
@@ -70,7 +71,6 @@ function JobForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        debugger;
         const newJob = {
             job_type: !props.isEditMode
                 ? formData.jobType
@@ -127,13 +127,14 @@ function JobForm(props) {
         <div>
             <button
                 className='btn-close float-end'
-                onClick={closeModalBtnClick}></button>
+                onClick={closeModalBtnClick}
+            ></button>
             <h2 className='text-center mt-3 mb-3'>
                 {props.isEditMode
                     ? `Промени задача №${props.selectedJob.id}`
                     : `Нова задача`}
             </h2>
-            <form className='m-auto' onSubmit={handleSubmit}>
+            <form className={styles['form']} onSubmit={handleSubmit}>
                 <JobField
                     htmlFor='jobType'
                     label='Задача'
@@ -175,7 +176,7 @@ function JobForm(props) {
                     optionText='Избор на нива'
                 />
                 <div>
-                    <button className='btn btn-primary' type='submit'>
+                    <button className={styles['form-button']} type='submit'>
                         {props.isEditMode ? 'Промени задачата' : 'Нова задача'}
                     </button>
                 </div>

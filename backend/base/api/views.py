@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import generics as api_views
-from rest_framework import permissions
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -50,7 +49,6 @@ class GetUsers(api_views.ListCreateAPIView):
         if self.request.method == 'POST':
             return UserCreateSerializer
         return UserListSeriazlizer
-
 
 class UserCreate(api_views.CreateAPIView):
     queryset = UserModel.objects.all()

@@ -1,4 +1,4 @@
-import React from 'react';
+import styles from './FormField.module.css';
 
 const FormField = ({
     label,
@@ -10,12 +10,12 @@ const FormField = ({
     htmlFor,
 }) => {
     return (
-        <div>
-            <label className='form-label fs-4 fw-bold' htmlFor={htmlFor}>
+        <div className={styles['form-row']}>
+            <label className={styles['form-label']} htmlFor={htmlFor}>
                 {label}:
             </label>
             <input
-                className='form-control border border-dark-subtle border-2 rounded-3'
+                className={styles['form-input']}
                 id={htmlFor}
                 type={type}
                 name={name}

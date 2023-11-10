@@ -1,0 +1,111 @@
+.form-wrapper {
+    margin: auto;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8rem;
+}
+
+.inner-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 45%;
+    height: 500px;
+    border-radius: 0.6rem;
+    box-shadow: 0px 0px 40px 12px rgba(0, 0, 0, 0.1);
+}
+
+.img-wrapper {
+    width: 50%;
+}
+
+.img-wrapper > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.6rem;
+    box-shadow: 0px 0px 40px 12px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+}
+
+.form {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    width: 50%;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.button {
+    background-color: #fff;
+    padding: 0.2rem 2.5rem;
+    font-size: 24px;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.6rem;
+    box-shadow: 0px 0px 40px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin: 12px 0;
+}
+
+.helper-text {
+    color: rgb(105, 103, 103);
+    font-style: italic;
+}
+
+@media (max-width: 1250px) and (min-width: 240px) {
+    .inner-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 50%; /* Change width to occupy full available space */
+        height: 0;
+    }
+
+    .img-wrapper,
+    .img-wrapper > img {
+        display: none;
+    }
+
+    .form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1250px) and (min-width: 850px) {
+    .inner-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: 0;
+    }
+
+    .img-wrapper {
+        display: flex;
+        width: 80%;
+        height: 300px;
+        margin: auto;
+    }
+
+    .img-wrapper > img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.6rem;
+        box-shadow: 0px 0px 40px 12px rgba(0, 0, 0, 0.1);
+        object-fit: cover;
+    }
+
+    .form {
+        width: 100%;
+    }
+}

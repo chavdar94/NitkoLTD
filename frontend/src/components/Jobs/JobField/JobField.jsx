@@ -1,21 +1,23 @@
-import React from 'react';
+import styles from './JobField.module.css';
 
 const JobField = (props) => {
     return (
-        <div className='pb-2'>
+        <div className={styles['inputs-wrapper']}>
             <label htmlFor={props.htmlFor}>{props.label}:</label>
             <select
-                className='form-select'
+                className={styles['form-field']}
                 id={props.id}
                 value={props.value}
                 name={props.name}
                 onChange={props.onChange}
-                required>
+                required
+            >
                 <option value=''>{props.optionText}</option>
                 {props.data.map((item) => (
                     <option
                         key={item.id}
-                        value={props.name === 'jobType' ? item.name : item.id}>
+                        value={props.name === 'jobType' ? item.name : item.id}
+                    >
                         {item.name}
                     </option>
                 ))}
