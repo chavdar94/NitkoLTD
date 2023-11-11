@@ -6,7 +6,7 @@ import styles from './Modal.module.css';
 const Backdrop = (props) => {
     const backDropOnClick = () => {
         props.onClose();
-        props.setIsEditMode(false);
+        props.setIsEditMode?.(false);
     };
     return <div className={styles['backdrop']} onClick={backDropOnClick} />;
 };

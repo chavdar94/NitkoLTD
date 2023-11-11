@@ -28,3 +28,10 @@
     align-items: center;
     gap: 1rem;
 }
+
+@media screen and (min-width: 340px) and (max-width: 724px) {
+    .footer {
+        flex-direction: column;
+        height: 10rem;
+    }
+}

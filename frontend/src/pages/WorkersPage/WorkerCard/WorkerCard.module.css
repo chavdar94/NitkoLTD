@@ -1,0 +1,22 @@
+.card {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0.6rem;
+    box-shadow: 0px 0px 40px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: box-shadow 300ms ease;
+}
+
+.card:hover {
+    box-shadow: 0px 0px 40px 1px rgba(0, 0, 0, 0.3);
+}
+
+.last-job {
+    padding-left: 0.6rem;
+}
+
+.worker-name {
+    text-decoration: underline;
+    text-underline-offset: 0.47rem;
+    margin-bottom: 0.5rem;
+}

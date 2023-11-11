@@ -93,7 +93,6 @@ function JobForm(props) {
 
             if (response.status === 201) {
                 props.toggleModal();
-                console.log('Modal toggled');
                 props.hasFetched(false);
             }
         } catch (error) {

@@ -12,6 +12,7 @@ import Layout from './utils/Layout';
 import RequireAuth from './utils/RequireAuth';
 import GuestRoute from './utils/GuestRoute';
 import Footer from './components/Footer/Footer';
+import SingleWorkerPage from './pages/WorkersPage/SingleWorkerPage';
 
 function App() {
     return (
@@ -32,6 +33,10 @@ function App() {
                     <Route element={<RequireAuth />}>
                         <Route path='jobs' element={<JobsPage />} />
                         <Route path='workers' element={<WorkersPage />} />
+                        <Route
+                            path='workers/:workerId'
+                            element={<SingleWorkerPage />}
+                        />
                     </Route>
 
                     {/* not found */}

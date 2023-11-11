@@ -42,6 +42,7 @@
     width: 50%;
     display: flex;
     justify-content: center;
+    height: 100%;
 }
 
 .crops-img {
@@ -59,12 +60,12 @@
 }
 
 .crops-heading {
-    font-size: 2.6rem;
+    font-size: 1.6rem;
     font-weight: 600;
 }
 
 .green {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: green;
     letter-spacing: -1px;
@@ -73,4 +74,46 @@
 .crops-info-txt {
     color: rgb(103, 103, 103);
     font-style: italic;
+}
+
+@media screen and (min-width: 340px) and (max-width: 724px) {
+    .hero-info {
+        margin: 2rem;
+        color: #000;
+    }
+
+    .hero-heading {
+        font-size: 2.2rem;
+    }
+
+    .crops {
+        display: block;
+        width: 100%;
+        margin: 2rem 0;
+    }
+
+    .crops-img-wrapper {
+        width: 100%;
+    }
+
+    .crops-img {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .crops-intro {
+        width: 100%;
+        padding: 1rem;
+    }
+}
+
+@media screen and (min-width: 725px) and (max-width: 1400px) {
+    .crops {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 1rem auto;
+    }
 }
