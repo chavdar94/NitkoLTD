@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import useAuth from '../../hooks/useAuth';
-import logoImage from '../../../public/assets/logo.png';
+import logoImage from '../../assets/logo.png';
 
 const Header = () => {
     const { user, logoutUser } = useAuth();

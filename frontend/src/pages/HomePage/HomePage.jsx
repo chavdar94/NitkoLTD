@@ -1,6 +1,3 @@
-// import React, { useState, useEffect, useContext } from 'react';
-// import AuthContext from '../context/AuthContext';
-import Footer from '../../components/Footer/Footer';
 import styles from './HomePage.module.css';
 
 const HomePage = () => {
