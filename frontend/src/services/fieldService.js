@@ -9,7 +9,7 @@ export async function getAll() {
 
 export async function create(formData) {
 	const response = await axiosInstance.post('fields/', formData);
-	const data = await response.data;
+	// const data = await response.data;
 
-	return data;
+	return response;
 }
