@@ -12,7 +12,7 @@ import Layout from './utils/Layout';
 import RequireAuth from './utils/RequireAuth';
 import GuestRoute from './utils/GuestRoute';
 import Footer from './components/Footer/Footer';
-import SingleWorkerPage from './pages/WorkersPage/SingleWorkerPage';
+import SingleWorkerPage from './pages/WorkersPage/SingleWorker/SingleWorkerPage';
 import FieldsPage from './pages/FieldsPage/FieldsPage';
 
 function App() {

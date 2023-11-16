@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Modal from '../../components/Modal/Modal';
-import axiosInstance from '../../utils/axios';
+import styles from './FieldsPage.module.css';
 
 import * as fieldsServices from '../../services/fieldService';
 import FieldsForm from '../../components/Fields/FieldsForm/FieldsForm';
@@ -28,6 +28,11 @@ const FieldsPage = () => {
 
 	return (
 		<>
+			<h1 className={styles['fields-heading']}>Налични ниви</h1>
+			<button className={styles['button']} onClick={toggleModal}>
+				Добави нива
+			</button>
+
 			{fields.length == 0 && <h2>Няма ниви</h2>}
 			{fields.length > 0 &&
 				fields.map((field) => (
@@ -35,7 +40,6 @@ const FieldsPage = () => {
 						{field.name} - {field.size}
 					</h3>
 				))}
-			<button onClick={toggleModal}>Добави нива</button>
 
 			{showModal && (
 				<Modal onClose={toggleModal}>

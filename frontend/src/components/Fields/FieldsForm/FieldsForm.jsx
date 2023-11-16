@@ -1,14 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormField from '../../Auth/FormField';
 import * as fieldServices from '../../../services/fieldService';
+import * as workerService from '../../../services/workerService';
+import transformWorkerData from '../../../utils/WorkerDataTransform';
+import JobField from '../../Jobs/JobField/JobField';
+
+import styles from './FieldsForm.module.css';
 
 const initialValues = {
 	name: '',
 	size: '',
+	workerId: '',
 };
 
 const FieldsForm = ({ onFieldAdded }) => {
 	const [formData, setFormData] = useState(initialValues);
+	const [workers, setWorkers] = useState([]);
+
+	useEffect(() => {
+		workerService.getAll().then((data) => setWorkers(data));
+	}, []);
 
 	const handleChange = (e) => {
 		setFormData((oldState) => ({
@@ -19,12 +30,19 @@ const FieldsForm = ({ onFieldAdded }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const response = await fieldServices.create(formData);
+		const response = await fieldServices.create({
+			...formData,
+			workersIds: [formData.workerId],
+		});
+
+		console.log(response);
 
 		if (response.status === 201) {
 			onFieldAdded();
 		}
 	};
+
+	const workerData = workers.map((worker) => transformWorkerData(worker));
 
 	return (
 		<form onSubmit={handleSubmit}>
@@ -47,7 +65,17 @@ const FieldsForm = ({ onFieldAdded }) => {
 				value={formData.size}
 				onChange={handleChange}
 			/>
-			<button>Добави</button>
+
+			<JobField
+				htmlFor='worker'
+				label='Работник'
+				value={formData.workerId}
+				name='workerId'
+				onChange={handleChange}
+				data={workerData}
+				optionText='Избор на работник'
+			/>
+			<button className={styles['btn-add']}>Добави</button>
 		</form>
 	);
 };
