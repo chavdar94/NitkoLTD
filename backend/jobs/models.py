@@ -29,6 +29,6 @@ class JobsChoices(ChoicesEnum):
 class Job(models.Model):
     job_type = models.CharField(
         max_length=JobsChoices.max_length(), choices=JobsChoices.choices())
-    worker = models.ForeignKey(Worker, on_delete=models.DO_NOTHING)
-    field = models.ForeignKey(Field, on_delete=models.DO_NOTHING)
+    worker = models.ForeignKey(Worker, on_delete=models.SET_NULL, null=True)
+    field = models.ForeignKey(Field, on_delete=models.SET_NULL, null=True)
     created = models.DateTimeField(auto_now_add=True)

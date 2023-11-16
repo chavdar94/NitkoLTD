@@ -1,5 +1,4 @@
 from django.db import models
-from fields.models import Field
 
 
 class Worker(models.Model):
