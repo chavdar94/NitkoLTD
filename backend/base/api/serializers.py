@@ -1,9 +1,12 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, Serializer, CharField
 from fields.models import Field
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 
 UserModel = get_user_model()
+
 
 class FieldSerializer(ModelSerializer):
     class Meta:
@@ -37,7 +40,6 @@ class UserCreateSerializer(ModelSerializer):
             return attrs
 
 
-
 class UserListSeriazlizer(ModelSerializer):
     class Meta:
         model = UserModel
@@ -54,3 +56,18 @@ class UserDetailSerializer(ModelSerializer):
         extra_kwargs = {
             'password': {'write_only': True}
         }
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        token['username'] = user.username
+
+        return token
+
+
+class LoginSerializer(Serializer):
+    username = CharField()
+    password = CharField(write_only=True)

@@ -1,27 +1,18 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework import generics as api_views
+from rest_framework import generics as api_views, permissions, status
 
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.tokens import RefreshToken
 
-from .serializers import UserCreateSerializer, UserListSeriazlizer, UserDetailSerializer
+from .serializers import UserCreateSerializer, UserListSeriazlizer, UserDetailSerializer, MyTokenObtainPairSerializer, LoginSerializer
 from .permissions import IsAdminUserPermission
+from accounts.models import Profile
 
 
 UserModel = get_user_model()
-
-
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-
-        token['username'] = user.username
-
-        return token
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -50,11 +41,52 @@ class GetUsers(api_views.ListCreateAPIView):
             return UserCreateSerializer
         return UserListSeriazlizer
 
+
 class UserCreate(api_views.CreateAPIView):
     queryset = UserModel.objects.all()
     serializer_class = UserCreateSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def perform_create(self, serializer):
+        user = serializer.save()
+        Profile.objects.create(user=user)
 
 
 class UserDetails(api_views.RetrieveDestroyAPIView):
     queryset = UserModel.objects.all()
     serializer_class = UserDetailSerializer
+
+
+class LoginView(api_views.GenericAPIView):
+    permission_classes = [permissions.AllowAny]
+    serializer_class = LoginSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        username = serializer.validated_data['username']
+        password = serializer.validated_data['password']
+
+        user = UserModel.objects.get(username=username)
+
+        curr_user = authenticate(username=username, password=password)
+        if curr_user is not None:
+            login(request, curr_user)
+
+        if user.check_password(password):
+            refresh = RefreshToken.for_user(user)
+            access_token = str(refresh.access_token)
+            refresh_token = str(refresh)
+            user_data = {
+                'user_id': user.id,
+                'username': user.username
+            }
+
+            return Response({
+                'access': access_token,
+                'refresh': refresh_token,
+                'user': user_data
+            }, status=status.HTTP_200_OK)
+        else:
+            return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
