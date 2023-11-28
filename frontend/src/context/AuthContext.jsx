@@ -56,7 +56,8 @@ export const AuthProvider = ({ children }) => {
 				navigate(from, { replace: true });
 			}
 		} catch (err) {
-			setErrors(err.response.data);
+			console.error(err);
+			setErrors({ auth: 'Грешно потребителско име или парола' });
 		}
 	};
 
@@ -83,7 +84,7 @@ export const AuthProvider = ({ children }) => {
 				navigate('/login');
 			}
 		} catch (err) {
-			setErrors(err.response.data);
+			setErrors({ username: 'Потребителското име вече е заето' });
 		}
 	};
 	const updateTokens = async () => {
@@ -112,10 +113,15 @@ export const AuthProvider = ({ children }) => {
 		}
 	};
 
+	const clearErrors = () => {
+		setErrors({});
+	};
+
 	let contextData = {
 		user: user,
 		authTokens: authTokens,
 		errors: errors,
+		clearErrors: clearErrors,
 		loginUser: loginUser,
 		logoutUser: logoutUser,
 		registerUser: registerUser,
