@@ -25,6 +25,21 @@ export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(() => initialUserValue);
 	const [loading, setLoading] = useState(true);
 
+	useEffect(() => {
+		if (loading) {
+			updateTokens();
+		}
+
+		const updateTimer = 1000 * 60 * 4;
+		const interval = setInterval(() => {
+			if (authTokens) {
+				updateTokens();
+			}
+		}, updateTimer);
+
+		return () => clearInterval(interval);
+	}, [authTokens, loading]);
+
 	const loginUser = async ({ username, password }) => {
 		try {
 			const response = axiosInstance.post('token/', {
@@ -49,7 +64,7 @@ export const AuthProvider = ({ children }) => {
 		setAuthTokens(null);
 		setUser(null);
 		localStorage.removeItem('authTokens');
-		navigate('/login');
+		navigate('/');
 	};
 
 	const registerUser = async ({ username, password, password2 }) => {
@@ -105,21 +120,6 @@ export const AuthProvider = ({ children }) => {
 		logoutUser: logoutUser,
 		registerUser: registerUser,
 	};
-
-	useEffect(() => {
-		if (loading) {
-			updateTokens();
-		}
-
-		const updateTimer = 1000 * 60 * 4;
-		const interval = setInterval(() => {
-			if (authTokens) {
-				updateTokens();
-			}
-		}, updateTimer);
-
-		return () => clearInterval(interval);
-	}, [authTokens, loading]);
 
 	return (
 		<AuthContext.Provider value={contextData}>

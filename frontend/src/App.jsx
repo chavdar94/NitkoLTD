@@ -14,6 +14,7 @@ import GuestRoute from './utils/GuestRoute';
 import Footer from './components/Footer/Footer';
 import SingleWorkerPage from './pages/WorkersPage/SingleWorker/SingleWorkerPage';
 import FieldsPage from './pages/FieldsPage/FieldsPage';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
 
 function App() {
 	return (
@@ -39,6 +40,7 @@ function App() {
 							element={<SingleWorkerPage />}
 						/>
 						<Route path='fields' element={<FieldsPage />} />
+						<Route path='profile' element={<ProfilePage />} />
 					</Route>
 
 					{/* not found */}

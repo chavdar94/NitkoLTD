@@ -35,8 +35,6 @@ const FieldsForm = ({ onFieldAdded }) => {
 			workersIds: [formData.workerId],
 		});
 
-		console.log(response);
-
 		if (response.status === 201) {
 			onFieldAdded();
 		}

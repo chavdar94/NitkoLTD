@@ -26,6 +26,9 @@ const Header = () => {
 						<Link className={styles['nav-link']} to={'/fields'}>
 							Ниви
 						</Link>
+						<Link className={styles['nav-link']} to={'/profile'}>
+							Профил
+						</Link>
 						<a className={styles['nav-link']} onClick={logoutUser}>
 							Изход
 						</a>
