@@ -16,7 +16,6 @@ const initialState = [
 
 const ProfilePage = () => {
 	const [profile, setProfile] = useState(initialState);
-	console.log(profile);
 	const [hasProfile, setHasProfile] = useState(false);
 
 	const [showModal, setShowModal] = useState(false);

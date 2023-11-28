@@ -26,7 +26,6 @@ const ProfileEdit = ({ onProfileAdded, profile, userId }) => {
 		};
 
 		const response = await profileServices.editProfile(data);
-		console.log(response);
 		if (response.status === 200) {
 			onProfileAdded();
 		}
