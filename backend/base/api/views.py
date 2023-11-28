@@ -9,6 +9,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import UserCreateSerializer, UserListSeriazlizer, UserDetailSerializer, MyTokenObtainPairSerializer, LoginSerializer
 from .permissions import IsAdminUserPermission
+from accounts.permissions import DeleteOnlyOwner
 from accounts.models import Profile
 
 
@@ -55,6 +56,8 @@ class UserCreate(api_views.CreateAPIView):
 class UserDetails(api_views.RetrieveDestroyAPIView):
     queryset = UserModel.objects.all()
     serializer_class = UserDetailSerializer
+
+    permission_classes = [DeleteOnlyOwner]
 
 
 class LoginView(api_views.GenericAPIView):

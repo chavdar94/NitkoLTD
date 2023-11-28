@@ -5,7 +5,7 @@ from .permissions import IsOwnerOrReadOnly
 from .serializers import ProfileSerializer
 
 
-class ProfileDetailsUpdateView(api_views.ListCreateAPIView, api_views.RetrieveUpdateAPIView):
+class ProfileDetailsUpdateView(api_views.ListCreateAPIView, api_views.RetrieveUpdateDestroyAPIView):
     serializer_class = ProfileSerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 

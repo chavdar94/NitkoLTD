@@ -5,18 +5,28 @@ export async function getProfile() {
 		const response = await axiosInstance.get('profile/');
 		const data = await response.data;
 		return data;
-	} catch {
-		const tokenString = localStorage.getItem('authTokens');
-		const token = JSON.parse(tokenString);
-		const access = token.access;
+	} catch (err) {
+		console.error(err);
 	}
 }
 
-export async function createProfile(formData) {
+export async function editProfile(formData) {
 	try {
-		const response = await axiosInstance.put('profile/', formData);
+		return await axiosInstance.put('profile/', formData);
+	} catch (err) {
+		console.error(err);
+	}
+}
 
-		const data = await response.data;
+export async function deleteProfile(userId) {
+	try {
+		const profileResponse = await axiosInstance.delete('profile/');
+		const userResponse = await axiosInstance.delete(`users/${userId}/`);
+
+		const profileData = await profileResponse.data;
+		const userData = await userResponse.data;
+
+		return { profile: profileData, user: userData };
 	} catch (err) {
 		console.error(err);
 	}

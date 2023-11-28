@@ -3,13 +3,12 @@ import FormField from '../Auth/FormField';
 import styles from '../Fields/FieldsForm/FieldsForm.module.css';
 import * as profileServices from '../../services/profileService';
 
-const ProfileEdit = ({ onProfileAdded, userId }) => {
+const ProfileEdit = ({ onProfileAdded, profile, userId }) => {
 	const [formData, setFormData] = useState({
-		email: '',
-		firstName: '',
-		lastName: '',
+		email: profile?.email ? profile.email : '',
+		firstName: profile?.first_name ? profile.first_name : '',
+		lastName: profile?.last_name ? profile.last_name : '',
 	});
-
 	const handleChange = (e) => {
 		setFormData((oldState) => ({
 			...oldState,
@@ -19,7 +18,6 @@ const ProfileEdit = ({ onProfileAdded, userId }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(userId);
 		const data = {
 			email: formData.email,
 			first_name: formData.firstName,
@@ -27,11 +25,11 @@ const ProfileEdit = ({ onProfileAdded, userId }) => {
 			user: userId,
 		};
 
-		const response = await profileServices.createProfile(data);
+		const response = await profileServices.editProfile(data);
 		console.log(response);
-		// if (response.status === 201) {
-		// 	onProfileAdded();
-		// }
+		if (response.status === 200) {
+			onProfileAdded();
+		}
 	};
 
 	return (
