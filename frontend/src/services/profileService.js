@@ -20,7 +20,7 @@ export async function editProfile(formData) {
 
 export async function deleteProfile(userId) {
 	try {
-		const profileResponse = await axiosInstance.delete('profile/');
+		const profileResponse = await axiosInstance.delete(`profile/${userId}`);
 		const userResponse = await axiosInstance.delete(`users/${userId}/`);
 
 		const profileData = await profileResponse.data;

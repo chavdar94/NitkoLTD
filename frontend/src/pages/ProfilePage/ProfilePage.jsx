@@ -50,9 +50,10 @@ const ProfilePage = () => {
 
 	return (
 		<>
-			<h2>Email: {profile[0]?.email}</h2>
-			<h3>Име: {profile[0]?.first_name}</h3>
-			<h3>Фамилия: {profile[0]?.last_name}</h3>
+			<h2>Профила на {user.username}</h2>
+			<h4>Email: {profile[0]?.email}</h4>
+			<h4>Име: {profile[0]?.first_name}</h4>
+			<h4>Фамилия: {profile[0]?.last_name}</h4>
 			<button className={styles['button']} onClick={toggleModal}>
 				Редактирай профила
 			</button>

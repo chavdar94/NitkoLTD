@@ -6,12 +6,13 @@ from rest_framework import generics as api_views, permissions, status
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import OutstandingToken
 
-from .serializers import UserCreateSerializer, UserListSeriazlizer, UserDetailSerializer, MyTokenObtainPairSerializer, LoginSerializer
+from .serializers import UserCreateSerializer, UserListSeriazlizer, UserDetailSerializer, MyTokenObtainPairSerializer, \
+    LoginSerializer
 from .permissions import IsAdminUserPermission
 from accounts.permissions import DeleteOnlyOwner
 from accounts.models import Profile
-
 
 UserModel = get_user_model()
 
@@ -58,6 +59,10 @@ class UserDetails(api_views.RetrieveDestroyAPIView):
     serializer_class = UserDetailSerializer
 
     permission_classes = [DeleteOnlyOwner]
+
+    def perform_destroy(self, instance):
+        OutstandingToken.objects.filter(user_id=instance.id).delete()
+        instance.delete()
 
 
 class LoginView(api_views.GenericAPIView):

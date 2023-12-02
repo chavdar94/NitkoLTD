@@ -12,7 +12,12 @@ urlpatterns = (
     path('users/', include([
         path('<int:pk>/', UserDetails.as_view(), name='users'),
     ])),
-    path('profile/', ProfileDetailsUpdateView.as_view(), name='profile'),
+    path('profile/', include([
+        path('', ProfileDetailsUpdateView.as_view(), name='profile'),
+        path('<int:pk>/', ProfileDetailsUpdateView.as_view(),
+         name='profile-delete'),
+    ])),
+
     path('auth/', include([
         path('register/', UserCreate.as_view(), name='register'),
     ])),
