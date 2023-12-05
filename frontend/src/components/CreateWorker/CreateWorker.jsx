@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import FormField from '../Auth/FormField';
-import axiosInstance from '../../utils/axios';
+import useAxios from '../../hooks/useAxios';
 
 import styles from './CreateWorker.module.css';
 
@@ -10,6 +10,7 @@ const CreateWorker = ({ onWorkerAdded }) => {
 		last_name: '',
 		wage: '',
 	};
+	const axiosInstance = useAxios();
 
 	const [formData, setFormData] = useState(initialValues);
 

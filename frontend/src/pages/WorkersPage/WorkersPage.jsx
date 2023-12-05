@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axiosInstance from '../../utils/axios';
+import useAxios from '../../hooks/useAxios';
 import WorkerCard from './WorkerCard/WorkerCard';
 import styles from './WorkersPage.module.css';
 import Modal from '../../components/Modal/Modal';
@@ -12,6 +12,7 @@ const WorkersPage = () => {
 	const toggleModal = () => {
 		setShowModal(!showModal);
 	};
+	const axiosInstance = useAxios();
 
 	const fetchWorkers = async () => {
 		try {

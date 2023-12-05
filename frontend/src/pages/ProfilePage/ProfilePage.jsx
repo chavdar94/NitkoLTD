@@ -4,6 +4,7 @@ import ProfileEdit from '../../components/Profile/ProfileEdit';
 import Modal from '../../components/Modal/Modal';
 import styles from '../FieldsPage/FieldsPage.module.css';
 import useAuth from '../../hooks/useAuth';
+import useAxios from '../../hooks/useAxios';
 
 const initialState = [
 	{
@@ -20,8 +21,14 @@ const ProfilePage = () => {
 
 	const [showModal, setShowModal] = useState(false);
 
+	const axiosInstance = useAxios();
+
 	useEffect(() => {
-		profileService.getProfile().then((res) => setProfile(res));
+		axiosInstance.get('profile/').then((res) => {
+			if (res.data.length > 0) {
+				setProfile(res.data);
+			}
+		});
 	}, []);
 
 	const { user, logoutUser } = useAuth();
@@ -32,19 +39,30 @@ const ProfilePage = () => {
 
 	const profileAdded = () => {
 		toggleModal();
-		profileService.getProfile().then((res) => {
-			setProfile(res);
+		axiosInstance.get('profile/').then((res) => {
+			setProfile(res.data);
 			setHasProfile(true);
 		});
 	};
 
+	const deleteUserAndProfile = async () => {
+		try {
+			await Promise.all([
+				axiosInstance.delete(`users/${user.user_id}/`),
+				axiosInstance.delete(`profile/${user.user_id}`),
+			]);
+
+			setProfile(initialState);
+			setHasProfile(false);
+			logoutUser();
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
 	const profileDeleteHandler = () => {
 		if (profile[0]) {
-			profileService.deleteProfile(profile[0]?.user).then(() => {
-				setProfile(initialState);
-				setHasProfile(false);
-				logoutUser();
-			});
+			deleteUserAndProfile();
 		}
 	};
 

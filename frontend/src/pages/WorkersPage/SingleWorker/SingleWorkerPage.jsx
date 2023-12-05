@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axiosInstance from '../../../utils/axios';
+import useAxios from '../../../hooks/useAxios';
 import styles from './SingleWorker.module.css';
 
 const SingleWorkerPage = () => {
@@ -8,6 +8,7 @@ const SingleWorkerPage = () => {
 	const [worker, setWorker] = useState({});
 
 	const navigate = useNavigate();
+	const axiosInstance = useAxios();
 
 	useEffect(() => {
 		axiosInstance

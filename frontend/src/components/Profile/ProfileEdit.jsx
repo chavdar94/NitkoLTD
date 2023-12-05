@@ -2,6 +2,8 @@ import { useState } from 'react';
 import FormField from '../Auth/FormField';
 import styles from '../Fields/FieldsForm/FieldsForm.module.css';
 import * as profileServices from '../../services/profileService';
+import useAxios from '../../hooks/useAxios';
+// import axiosInstance from '../../utils/axios';
 
 const ProfileEdit = ({ onProfileAdded, profile, userId }) => {
 	const [formData, setFormData] = useState({
@@ -9,6 +11,7 @@ const ProfileEdit = ({ onProfileAdded, profile, userId }) => {
 		firstName: profile?.first_name ? profile.first_name : '',
 		lastName: profile?.last_name ? profile.last_name : '',
 	});
+	const axiosInstance = useAxios();
 	const handleChange = (e) => {
 		setFormData((oldState) => ({
 			...oldState,
@@ -25,7 +28,8 @@ const ProfileEdit = ({ onProfileAdded, profile, userId }) => {
 			user: userId,
 		};
 
-		const response = await profileServices.editProfile(data);
+		// const response = await profileServices.editProfile(data);
+		const response = await axiosInstance.put(`profile/`, data);
 		if (response.status === 200) {
 			onProfileAdded();
 		}

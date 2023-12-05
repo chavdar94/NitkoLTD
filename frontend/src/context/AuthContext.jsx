@@ -25,21 +25,6 @@ export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(() => initialUserValue);
 	const [loading, setLoading] = useState(true);
 
-	useEffect(() => {
-		if (loading) {
-			updateTokens();
-		}
-
-		const updateTimer = 1000 * 60 * 4;
-		const interval = setInterval(() => {
-			if (authTokens) {
-				updateTokens();
-			}
-		}, updateTimer);
-
-		return () => clearInterval(interval);
-	}, [authTokens, loading]);
-
 	const loginUser = async ({ username, password }) => {
 		try {
 			const response = axiosInstance.post('token/', {
@@ -87,31 +72,31 @@ export const AuthProvider = ({ children }) => {
 			setErrors({ username: 'Потребителското име вече е заето' });
 		}
 	};
-	const updateTokens = async () => {
-		if (authTokens) {
-			try {
-				const response = axiosInstance.post('token/refresh/', {
-					refresh: authTokens?.refresh,
-				});
+	// const updateTokens = async () => {
+	// 	if (authTokens) {
+	// 		try {
+	// 			const response = axiosInstance.post('token/refresh/', {
+	// 				refresh: authTokens?.refresh,
+	// 			});
 
-				const { status, data } = await response;
+	// 			const { status, data } = await response;
 
-				if (status === 200) {
-					setAuthTokens(data);
-					setUser(jwt_decode(data.access));
-					localStorage.setItem('authTokens', JSON.stringify(data));
-				} else {
-					logoutUser();
-				}
-			} catch (err) {
-				console.error(err);
-			}
-		}
+	// 			if (status === 200) {
+	// 				setAuthTokens(data);
+	// 				setUser(jwt_decode(data.access));
+	// 				localStorage.setItem('authTokens', JSON.stringify(data));
+	// 			} else {
+	// 				logoutUser();
+	// 			}
+	// 		} catch (err) {
+	// 			console.error(err);
+	// 		}
+	// 	}
 
-		if (loading) {
-			setLoading(false);
-		}
-	};
+	// 	if (loading) {
+	// 		setLoading(false);
+	// 	}
+	// };
 
 	const clearErrors = () => {
 		setErrors({});
@@ -125,7 +110,16 @@ export const AuthProvider = ({ children }) => {
 		loginUser: loginUser,
 		logoutUser: logoutUser,
 		registerUser: registerUser,
+		setAuthTokens: setAuthTokens,
+		setUser: setUser,
 	};
+
+	useEffect(() => {
+		if (authTokens) {
+			setUser(jwt_decode(authTokens.access));
+		}
+		setLoading(false);
+	}, [authTokens, loading]);
 
 	return (
 		<AuthContext.Provider value={contextData}>

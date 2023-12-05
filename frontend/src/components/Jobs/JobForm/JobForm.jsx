@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import JobField from '../JobField/JobField';
 import transformWorkerData from '../../../utils/WorkerDataTransform';
-import axiosInstance from '../../../utils/axios';
+import useAxios from '../../../hooks/useAxios';
 import styles from './JobForm.module.css';
 
 const jobs = [
@@ -16,6 +16,8 @@ const jobs = [
 ];
 
 function JobForm(props) {
+	const axiosInstance = useAxios();
+
 	const defaultFormData = {
 		jobType: '',
 		workerId: '',
@@ -103,7 +105,6 @@ function JobForm(props) {
 	const updateJob = async (jobId, jobData) => {
 		try {
 			const response = await axiosInstance.put(`jobs/${jobId}/`, jobData);
-			console.log(response);
 
 			if (response.status === 200) {
 				props.toggleModal();
