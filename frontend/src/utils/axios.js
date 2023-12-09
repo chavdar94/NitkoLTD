@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
 	baseURL: baseUrl,
 	timeout: 1000,
 	headers: {
-		Authorization: `JWT ${authTokens?.access}`,
+		// Authorization: `JWT ${authTokens?.access}`,
 		'Content-Type': 'application/json',
 		accept: 'application/json',
 	},

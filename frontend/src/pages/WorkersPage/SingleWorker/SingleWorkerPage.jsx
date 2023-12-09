@@ -46,7 +46,7 @@ const SingleWorkerPage = () => {
 						{worker.worker_fields &&
 						worker.worker_fields.length > 0 ? (
 							worker.worker_fields.map((field) => (
-								<p key={field.id}>{field.name}</p>
+								<p key={field.id}>{field.field__name}</p>
 							))
 						) : (
 							<p>Няма ниви</p>

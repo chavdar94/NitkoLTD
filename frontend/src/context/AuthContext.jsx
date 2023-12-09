@@ -72,31 +72,6 @@ export const AuthProvider = ({ children }) => {
 			setErrors({ username: 'Потребителското име вече е заето' });
 		}
 	};
-	// const updateTokens = async () => {
-	// 	if (authTokens) {
-	// 		try {
-	// 			const response = axiosInstance.post('token/refresh/', {
-	// 				refresh: authTokens?.refresh,
-	// 			});
-
-	// 			const { status, data } = await response;
-
-	// 			if (status === 200) {
-	// 				setAuthTokens(data);
-	// 				setUser(jwt_decode(data.access));
-	// 				localStorage.setItem('authTokens', JSON.stringify(data));
-	// 			} else {
-	// 				logoutUser();
-	// 			}
-	// 		} catch (err) {
-	// 			console.error(err);
-	// 		}
-	// 	}
-
-	// 	if (loading) {
-	// 		setLoading(false);
-	// 	}
-	// };
 
 	const clearErrors = () => {
 		setErrors({});
