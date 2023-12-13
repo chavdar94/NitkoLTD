@@ -13,17 +13,17 @@ const FieldsPage = () => {
 		setShowModal(!showModal);
 	};
 
-	async function fetchWorkers() {
+	async function fetchFields() {
 		return await fieldsServices.getAll().then((data) => setFields(data));
 	}
 
 	useEffect(() => {
-		fetchWorkers();
+		fetchFields();
 	}, []);
 
 	const handleFieldAdded = () => {
 		toggleModal();
-		fetchWorkers();
+		fetchFields();
 	};
 
 	return (

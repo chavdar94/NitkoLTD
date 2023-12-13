@@ -3,7 +3,7 @@ import jwt_decode from 'jwt-decode';
 import dayjs from 'dayjs';
 import useAuth from './useAuth';
 
-const baseUrl = 'http://127.0.0.1:8000/api/';
+const baseUrl = import.meta.env.VITE_API_URL;
 
 const useAxios = () => {
 	const { authTokens, setUser, setAuthTokens } = useAuth();
